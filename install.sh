@@ -26,7 +26,7 @@ esac
 
 version="${KIN_VERSION:-}"
 if [ -z "$version" ]; then
-  info "Resolving latest release…"
+  info "Resolving latest release..."
   version="$(curl -fsSL "https://api.github.com/repos/$REPO/releases/latest" \
     | grep -m1 '"tag_name"' | cut -d'"' -f4)"
   [ -n "$version" ] || err "could not determine latest version"
@@ -45,7 +45,7 @@ url="https://github.com/$REPO/releases/download/$version/$asset"
 
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
-info "Downloading $asset…"
+info "Downloading $asset..."
 curl -fsSL "$url" -o "$tmp/$asset" || err "download failed: $url"
 tar -xzf "$tmp/$asset" -C "$tmp" || err "extract failed"
 
